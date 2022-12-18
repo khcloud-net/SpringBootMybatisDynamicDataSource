@@ -17,6 +17,7 @@ import org.springframework.context.annotation.Primary;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.util.StringUtils;
 
 import javax.sql.DataSource;
 import java.util.HashMap;
@@ -31,9 +32,6 @@ public class DataSourceConfig {
 
     @Autowired
     private DynamicDataSourceInterceptor dynamicDataSourceInterceptor;
-
-    @Autowired
-    private Environment env;
 
     @Autowired
     private MasterProperties masterProperties;
@@ -59,45 +57,13 @@ public class DataSourceConfig {
         log.info("slaveDataSource初始化");
         HikariDataSource dataSource = new HikariDataSource();
         dataSource.setJdbcUrl(slaveProperties.getUrl());
-        dataSource.setUsername(slaveProperties.getUsername());
-        dataSource.setPassword(slaveProperties.getPassword());
+        if(!StringUtils.isEmpty(slaveProperties.getUsername()))
+            dataSource.setUsername(slaveProperties.getUsername());
+        if(!StringUtils.isEmpty(slaveProperties.getPassword()))
+            dataSource.setPassword(slaveProperties.getPassword());
         dataSource.setDriverClassName(slaveProperties.getDriverClassName());
         return dataSource;
     }
-
-//    //默认是master数据源
-//    @ConfigurationProperties(prefix = "spring.datasource")
-//    @Bean(name = "masterDataSource")
-//    @Primary
-//    public DataSource masterProperties(){
-//        log.info("masterDataSource初始化");
-//        return DataSourceBuilder.create().build();
-//    }
-//
-//    @ConfigurationProperties(prefix = "standy.datasource")
-//    @Bean(name = "slaveDataSource")
-//    public DataSource slaveDataSource(){
-//        log.info("slaveDataSource初始化");
-////        return DataSourceBuilder.create().build();
-//
-//        String jdbcurl = env.getProperty("standby.datasource.url");
-//        String jdbdriver = env.getProperty("standby.datasource.driver-class-name");
-//        String jdbcpas = env.getProperty("standby.datasource.password");
-//        String jdbcusername = env.getProperty("standby.datasource.username");
-//    }
-
-
-
-//    @Bean
-//    public SqlSessionFactoryBean mysqlSessionFactory(DataSource dataSource) throws Exception {
-//        SqlSessionFactoryBean sqlSessionFactoryBean = new SqlSessionFactoryBean();
-//        sqlSessionFactoryBean.setDataSource(dataSource);
-//        PathMatchingResourcePatternResolver resolver = new PathMatchingResourcePatternResolver();
-//        Resource[] resources = resolver.getResources(mapperLocation);
-//        sqlSessionFactoryBean.setMapperLocations(resources);
-//        sqlSessionFactoryBean.setPlugins(new Interceptor[]{new DynamicDataSourceInterceptor()});
-//        return sqlSessionFactoryBean;
-//    }
 
     @Bean(name = "dynamicDataSource")
     public DynamicDataSource DataSource(@Qualifier("masterDataSource") DataSource masterDataSource,

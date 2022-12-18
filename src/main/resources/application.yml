@@ -40,16 +40,24 @@ mybatis:
   mapper-locations: classpath:mappers/**/*.xml
 #    - mappers/ProductMapper.xml
 
-
 standby:
   # 数据库配置
   datasource:
-    driver-class-name: com.mysql.jdbc.Driver
-    type: com.zaxxer.hikari.HikariDataSource
-    url: jdbc:mysql://localhost:3308/redis_cache_test?useUnicode=true&amp;characterEncoding=utf-8&useSSL=true
-    username: slave
-    password: slave
+#    driver-class-name: com.mysql.jdbc.Driver
+#    type: com.zaxxer.hikari.HikariDataSource
+#    url: jdbc:mysql://localhost:3308/redis_cache_test?useUnicode=true&amp;characterEncoding=utf-8&useSSL=true
+#    username: slave
+#    password: slave
 
+    # mongodb
+    # demo:  https://github.com/mongodb/mongo-jdbc-driver/blob/master/demo/src/main/java/com/mongodb/jdbc/demo/Main.java
+    driver-class-name:  com.mongodb.jdbc.MongoDriver
+    type: com.zaxxer.hikari.HikariDataSource
+#    url: jdbc:mongodb://[username:password@]host1[:port1][,...hostN[:portN]][/[defaultauthdb][?option1=value1[&option2=value2]...]
+#    url: jdbc:mongodb://127.0.0.1:27017/redis_cache_test
+    url: jdbc:mongodb://admin:123456@localhost:27017/admin?authSource=redis_cache_test
+    username: admin
+    password: 123456
 
 logging:
   level:

@@ -38,6 +38,11 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
+<!--		<dependency>-->
+<!--			<groupId>org.springframework.boot</groupId>-->
+<!--			<artifactId>spring-boot-starter-data-mongodb</artifactId>-->
+<!--			<version>2.0.1.RELEASE</version>-->
+<!--		</dependency>-->
 
 		<dependency>
 			<groupId>com.h2database</groupId>
@@ -54,6 +59,13 @@
 			<groupId>com.zaxxer</groupId>
 			<artifactId>HikariCP</artifactId>
 			<version>4.0.3</version>
+		</dependency>
+
+		<!-- https://search.maven.org/artifact/org.mongodb/mongodb-jdbc/2.0.1/jar -->
+		<dependency>
+			<groupId>org.mongodb</groupId>
+			<artifactId>mongodb-jdbc</artifactId>
+			<version>1.1.0</version>  <!-- 2.0.1 -->
 		</dependency>
 
 		<!-- swagger -->
@@ -87,6 +99,7 @@
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
+
 
 	</dependencies>
 

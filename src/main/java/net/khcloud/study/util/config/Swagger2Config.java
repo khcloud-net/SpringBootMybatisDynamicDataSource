@@ -33,7 +33,7 @@ public class Swagger2Config {
                 // 过滤路径
                 //.paths(PathSelectors.ant())
                 // 指定扫描的包
-                .apis(RequestHandlerSelectors.basePackage("com.ccb.ftech.controller"))
+                .apis(RequestHandlerSelectors.basePackage("net.khcloud.study.controller"))
                 .build();
     }
 
