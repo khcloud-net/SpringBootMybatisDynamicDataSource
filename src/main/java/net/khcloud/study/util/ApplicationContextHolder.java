@@ -1,4 +1,4 @@
-package com.ccb.ftech.util;
+package net.khcloud.study.util;
 
 /**
  * Created by GBC on 2017/10/20.

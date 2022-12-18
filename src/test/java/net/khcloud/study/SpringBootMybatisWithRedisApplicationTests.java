@@ -1,6 +1,6 @@
-package com.ccb.ftech;
+package net.khcloud.study;
 
-import com.ccb.ftech.dao.domain.Product;
+import net.khcloud.study.dao.domain.Product;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;

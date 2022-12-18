@@ -2,16 +2,16 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.ccb.ftech.dao.mapper.ProductMapper">
+<mapper namespace="net.khcloud.study.dao.mapper.ProductMapper">
 
     <!-- 开启基于redis的二级缓存 -->
 <!--    <cache type="com.ccb.ftech.util.RedisCache"/>-->
 
-    <select id="select" resultType="com.ccb.ftech.dao.domain.Product">
+    <select id="select" resultType="net.khcloud.study.dao.domain.Product">
         SELECT * FROM products WHERE id = #{id} LIMIT 1
     </select>
 
-    <update id="update" parameterType="com.ccb.ftech.dao.domain.Product" flushCache="true">
+    <update id="update" parameterType="net.khcloud.study.dao.domain.Product" flushCache="true">
         UPDATE products SET name = #{name}, price = #{price} WHERE id = #{id} LIMIT 1
     </update>
 

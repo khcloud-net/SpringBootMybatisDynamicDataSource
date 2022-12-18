@@ -1,4 +1,4 @@
-package com.ccb.ftech.exception;
+package net.khcloud.study.exception;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;

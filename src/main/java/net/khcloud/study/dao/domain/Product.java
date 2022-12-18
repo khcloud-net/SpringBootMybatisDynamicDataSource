@@ -1,4 +1,4 @@
-package com.ccb.ftech.dao.domain;
+package net.khcloud.study.dao.domain;
 
 import java.io.Serializable;
 

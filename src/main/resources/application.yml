@@ -35,7 +35,7 @@ spring:
 # mybatis配置
 mybatis:
   # 配置映射类所在包名
-  type-aliases-package: com.ccb.ftech.dao.domain
+  type-aliases-package: net.khcloud.study.dao.domain
   # 配置mapper xml文件所在路径，这里是一个数组
   mapper-locations: classpath:mappers/**/*.xml
 #    - mappers/ProductMapper.xml

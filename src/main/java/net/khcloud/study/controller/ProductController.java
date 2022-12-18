@@ -1,8 +1,8 @@
-package com.ccb.ftech.controller;
+package net.khcloud.study.controller;
 
-import com.ccb.ftech.exception.ProductNotFoundException;
-import com.ccb.ftech.dao.domain.Product;
-import com.ccb.ftech.dao.mapper.ProductMapper;
+import net.khcloud.study.exception.ProductNotFoundException;
+import net.khcloud.study.dao.domain.Product;
+import net.khcloud.study.dao.mapper.ProductMapper;
 import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;

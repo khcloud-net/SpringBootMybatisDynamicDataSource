@@ -1,6 +1,6 @@
-package com.ccb.ftech.dao.mapper;
+package net.khcloud.study.dao.mapper;
 
-import com.ccb.ftech.dao.domain.Product;
+import net.khcloud.study.dao.domain.Product;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
