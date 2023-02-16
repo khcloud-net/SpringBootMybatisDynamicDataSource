@@ -3,6 +3,8 @@ package net.khcloud.study.dynamic.Interceptor;
 import net.khcloud.study.dynamic.datasoource.DynamicDataSourceHolder;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.ibatis.cache.CacheKey;
+import org.apache.ibatis.executor.BaseExecutor;
+import org.apache.ibatis.executor.CachingExecutor;
 import org.apache.ibatis.executor.Executor;
 import org.apache.ibatis.executor.keygen.SelectKeyGenerator;
 import org.apache.ibatis.mapping.BoundSql;
@@ -14,6 +16,8 @@ import org.apache.ibatis.session.RowBounds;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.support.TransactionSynchronizationManager;
 
+import java.sql.*;
+import java.util.Calendar;
 import java.util.Locale;
 import java.util.Properties;
 import java.util.Random;
@@ -81,6 +85,9 @@ public class DynamicDataSourceInterceptor implements Interceptor {
 
         log.info("在" + lookupKey + "中进行操作");
         DynamicDataSourceHolder.setDbType(lookupKey);
+
+        addAdditionSQL(invocation);
+
         // 最后直接执行SQL
         return invocation.proceed();
     }
@@ -106,5 +113,23 @@ public class DynamicDataSourceInterceptor implements Interceptor {
         log.debug("setProperties");
     }
 
+
+    private void addAdditionSQL(Invocation invocation){
+        try {
+            Connection conn = ((CachingExecutor) invocation.getTarget()).getTransaction().getConnection();
+            try (Statement stmt = conn.createStatement();
+                 ResultSet rs = stmt.executeQuery("SELECT CURRENT_TIMESTAMP() as cur_time")) {
+                Timestamp st = null;
+                if (rs.next()) {
+                    st = rs.getTimestamp("cur_time");
+                }
+                log.info("################ Current timestamp of mysql is : {}", st);
+            } catch (SQLException ex) {
+                log.error("执行SQL失败.", ex);
+            }
+        }catch (SQLException ex){
+            log.error("获取连接失败.",ex);
+        }
+    }
 }
 

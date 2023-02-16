@@ -5,10 +5,11 @@ server:
 spring:
   # 数据库配置
   datasource:
-    driver-class-name: org.gjt.mm.mysql.Driver
-    url: jdbc:mysql://localhost:3307/redis_cache_test?useUnicode=true&amp;characterEncoding=utf-8&useSSL=true
+#    driver-class-name: org.gjt.mm.mysql.Driver
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/redis_cache_test?useUnicode=true&characterEncoding=utf-8&useSSL=true
     username: root
-    password: root
+    password: 123456
 
   redis:
     # redis数据库索引（默认为0），我们使用索引为3的数据库，避免和其他数据库冲突
@@ -22,15 +23,16 @@ spring:
     # redis连接超时时间（单位为毫秒）
     timeout: 0
     # redis连接池配置
-    pool:
-      # 最大可用连接数（默认为8，负数表示无限）
-      max-active: 8
-      # 最大空闲连接数（默认为8，负数表示无限）
-      max-idle: 8
-      # 最小空闲连接数（默认为0，该值只有为正数才有作用）
-      min-idle: 0
-      # 从连接池中获取连接最大等待时间（默认为-1，单位为毫秒，负数表示无限）
-      max-wait: -1
+    jedis:
+      pool:
+        # 最大可用连接数（默认为8，负数表示无限）
+        max-active: 8
+        # 最大空闲连接数（默认为8，负数表示无限）
+        max-idle: 8
+        # 最小空闲连接数（默认为0，该值只有为正数才有作用）
+        min-idle: 0
+        # 从连接池中获取连接最大等待时间（默认为-1，单位为毫秒，负数表示无限）
+        max-wait: -1
 
 # mybatis配置
 mybatis:
@@ -43,21 +45,21 @@ mybatis:
 standby:
   # 数据库配置
   datasource:
-#    driver-class-name: com.mysql.jdbc.Driver
-#    type: com.zaxxer.hikari.HikariDataSource
-#    url: jdbc:mysql://localhost:3308/redis_cache_test?useUnicode=true&amp;characterEncoding=utf-8&useSSL=true
-#    username: slave
-#    password: slave
 
-    # mongodb
-    # demo:  https://github.com/mongodb/mongo-jdbc-driver/blob/master/demo/src/main/java/com/mongodb/jdbc/demo/Main.java
-    driver-class-name:  com.mongodb.jdbc.MongoDriver
+    driver-class-name: com.mysql.cj.jdbc.Driver
     type: com.zaxxer.hikari.HikariDataSource
-#    url: jdbc:mongodb://[username:password@]host1[:port1][,...hostN[:portN]][/[defaultauthdb][?option1=value1[&option2=value2]...]
-#    url: jdbc:mongodb://127.0.0.1:27017/redis_cache_test
-    url: jdbc:mongodb://admin:123456@localhost:27017/admin?authSource=redis_cache_test
-    username: admin
+    url: jdbc:mysql://localhost:3306/redis_cache_test_bak?useUnicode=true&characterEncoding=utf-8&useSSL=true
+    username: root
     password: 123456
+
+#    # mongodb
+#    # demo:  https://github.com/mongodb/mongo-jdbc-driver/blob/master/demo/src/main/java/com/mongodb/jdbc/demo/Main.java
+#    driver-class-name:  com.mongodb.jdbc.MongoDriver
+#    type: com.zaxxer.hikari.HikariDataSource
+##    url: jdbc:mongodb://[username:password@]host1[:port1][,...hostN[:portN]][/[defaultauthdb][?option1=value1[&option2=value2]...]
+#    url: jdbc:mongodb://127.0.0.1:27017/redis_cache_test
+#    username: admin
+#    password: 123456
 
 logging:
   level:

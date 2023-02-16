@@ -4,9 +4,11 @@ import net.khcloud.study.dao.domain.Product;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.context.embedded.LocalServerPort;
+//import org.springframework.boot.context.embedded.LocalServerPort;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.client.TestRestTemplate;
+import org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringRunner;
 
@@ -19,8 +21,12 @@ import static org.assertj.core.api.Java6Assertions.assertThat;
 @ActiveProfiles(profiles = "test")
 public class SpringBootMybatisWithRedisApplicationTests {
 
-	@LocalServerPort
+//	@LocalServerPort
+	@Value("${server.port}")
 	private int port;
+
+	@Autowired
+	private ServletWebServerApplicationContext webServerAppCtxt;
 
 	@Autowired
 	private TestRestTemplate restTemplate;
@@ -28,6 +34,9 @@ public class SpringBootMybatisWithRedisApplicationTests {
 	@Test
 	public void test() {
 		long productId = 1;
+
+		port = webServerAppCtxt.getWebServer().getPort();
+
 		Product product = restTemplate.getForObject("http://localhost:" + port + "/product/" + productId, Product.class);
 		assertThat(product.getPrice()).isEqualTo(200);
 

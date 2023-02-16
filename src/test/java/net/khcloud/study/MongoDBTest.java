@@ -10,6 +10,7 @@ public class MongoDBTest {
     static final String JDBC_DRIVER = "com.mongodb.jdbc.MongoDriver";
 //    static final String URL = "jdbc:mongodb://mhuser:pencil@localhost:27017/admin";
     static final String URL = "jdbc:mongodb://admin:123456@localhost:27017/admin?authSource=redis_cache_test";
+
     private static final TimeZone UTC = TimeZone.getTimeZone("UTC");
 
     // Data used for test, in the test.test and test2.test collections:

@@ -65,7 +65,9 @@ public class DataSourceConfig {
         return dataSource;
     }
 
-    @Bean(name = "dynamicDataSource")
+
+//    @Bean(name = "dynamicDataSource")
+    @Bean(name = "dynDataSource")
     public DynamicDataSource DataSource(@Qualifier("masterDataSource") DataSource masterDataSource,
                                         @Qualifier("slaveDataSource") DataSource slaveDataSource) {
         //配置多数据源
